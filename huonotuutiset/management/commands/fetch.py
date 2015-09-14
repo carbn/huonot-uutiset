@@ -4,7 +4,7 @@ from datetime import datetime
 from time import mktime
 
 from django.core.management.base import BaseCommand, CommandError
-from django.db import transaction
+from django.db import transaction, DataError
 import feedparser
 import pytz
 
@@ -37,15 +37,19 @@ class Command(BaseCommand):
                 guid = uuid.UUID(bytes=hashlib.md5(entry['id']).digest())
                 published = datetime.fromtimestamp(mktime(entry['published_parsed'])).replace(tzinfo=pytz.UTC)
 
-                obj, created = NewsItem.objects.update_or_create(
-                    guid=guid,
-                    defaults={
-                        'site': site,
-                        'title': entry['title'],
-                        'link': entry['link'],
-                        'published': published
-                    }
-                )
+                try:
+                    obj, created = NewsItem.objects.update_or_create(
+                        guid=guid,
+                        defaults={
+                            'site': site,
+                            'title': entry['title'],
+                            'link': entry['link'],
+                            'published': published
+                        }
+                    )
+                except DataError as e:
+                    self.stdout.write('ERROR: ' + str(e))
+                    continue
 
                 if created:
                     self.stdout.write('[+] Added: %s' % entry['title'])

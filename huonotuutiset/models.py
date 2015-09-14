@@ -21,8 +21,8 @@ class Rule(models.Model):
 
 class NewsItem(models.Model):
     site = models.ForeignKey(Site)
-    title = models.CharField(max_length=128)
-    link = models.URLField()
+    title = models.CharField(max_length=256)
+    link = models.URLField(max_length=512)
     guid = models.UUIDField(primary_key=True)
     published = models.DateTimeField()
     matches = models.ManyToManyField(Rule, related_name='matches')
