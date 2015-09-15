@@ -11,7 +11,7 @@ class Site(models.Model):
 
 
 class Rule(models.Model):
-    name = models.CharField(max_length=15)
+    name = models.CharField(max_length=20)
     regex = models.CharField(max_length=256)
     multiplier = models.FloatField()
 
@@ -20,7 +20,7 @@ class Rule(models.Model):
 
 
 class NewsItem(models.Model):
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, related_name='newsitems')
     title = models.CharField(max_length=256)
     link = models.URLField(max_length=512)
     guid = models.UUIDField(primary_key=True)
