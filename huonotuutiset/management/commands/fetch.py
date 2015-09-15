@@ -14,18 +14,6 @@ from huonotuutiset.models import Site, NewsItem
 class Command(BaseCommand):
     help = 'Fetch new news items from the RSS feeds'
 
-    def fetch(self, url):
-        feed = feedparser.parse(url)
-
-        data = []
-
-        for entry in feed.entries:
-            item = {}
-
-            item['']
-
-        feed
-
     @transaction.atomic
     def handle(self, *args, **options):
         for site in Site.objects.all():
