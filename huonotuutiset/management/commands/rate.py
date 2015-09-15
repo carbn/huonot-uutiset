@@ -9,11 +9,23 @@ from huonotuutiset.rating import rate
 class Command(BaseCommand):
     help = 'Calculate ratings for news items'
 
+    def add_arguments(self, parser):
+        parser.add_argument('--all',
+            action='store_true',
+            dest='all',
+            default=False,
+            help='Update all ratings')
+
     @transaction.atomic
     def handle(self, *args, **options):
         rules = Rule.objects.all()
 
-        for item in NewsItem.objects.filter(score__isnull=True):
+        if options['all']:
+            all_items = NewsItem.objects.all()
+        else:
+            all_items = NewsItem.objects.filter(score__isnull=True)
+
+        for item in all_items:
             score, matches = rate(item.title, rules)
 
             item.score = score
