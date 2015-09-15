@@ -1,25 +1,26 @@
 import re
 
 from django.core.management.base import BaseCommand, CommandError
+from django.db import transaction
 
-from huonotuutiset.models import Site, NewsItem, Rule
-
+from huonotuutiset.models import NewsItem, Rule
+from huonotuutiset.rating import rate
 
 class Command(BaseCommand):
     help = 'Calculate ratings for news items'
 
+    @transaction.atomic
     def handle(self, *args, **options):
         rules = Rule.objects.all()
 
-        for item in NewsItem.objects.all():
-            score = 1.0
-            matches = []
+        for item in NewsItem.objects.filter(score__isnull=True):
+            score, matches = rate(item.title, rules)
 
-            for rule in rules:
-                if re.search(rule.regex, item.title, re.IGNORECASE|re.UNICODE):
-                    score *= rule.multiplier
-                    matches.append(rule.name)
+            item.score = score
+            item.matches = matches
+            item.save()
+
+            self.stdout.write('%s' % (item.title))
 
             if score != 1.0:
-                self.stdout.write('%s' % (item.title))
-                self.stdout.write('  score: %.1f, matches: %s' % (score, ' '.join(matches)))
+                self.stdout.write('  score: %.1f, matches: %s' % (score, ' '.join([m.name for m in matches])))

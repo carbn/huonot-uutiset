@@ -26,6 +26,7 @@ class NewsItem(models.Model):
     guid = models.UUIDField(primary_key=True)
     published = models.DateTimeField()
     matches = models.ManyToManyField(Rule, related_name='matches')
+    score = models.FloatField(null=True)
 
     def __unicode__(self):
         return self.title
