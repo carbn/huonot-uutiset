@@ -6,14 +6,37 @@ body {
     font-size: 18px;
 }
 
-h1 {
+.navbar-default,.navbar-collapse {
+    border: 0;
+}
+
+.navbar {
+    margin: 40px 0;
+}
+
+.navbar-nav>li.active>a {
+    box-shadow: 0 2px 0 #8BC0F1;
+    background-color: inherit !important;
+}
+
+.navbar-nav>li>a {
+    text-transform: uppercase;
+    margin: 0 2px;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.navbar-nav>li:not(.active)>a:hover {
+    box-shadow: 0 2px 0 #D2D2D2;
+}
+
+.navbar-brand {
     font-family: 'Lato', sans-serif;
     font-style: normal;
     font-weight: 200;
     font-size: 50px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    padding-bottom: 5px;
 }
 
 table {
@@ -24,4 +47,8 @@ table {
 
 table td {
     padding: 3px;
+}
+
+caption {
+    font-size: 20px;
 }
