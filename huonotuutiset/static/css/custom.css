@@ -1,0 +1,27 @@
+body {
+    background-color: #f8f8f8;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 50px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+table {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+
+table td {
+    padding: 3px;
+}

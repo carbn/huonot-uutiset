@@ -1,0 +1,24 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{% static "vendor/bootstrap-3.3.5-dist/css/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "css/custom.css" %}" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Huonot Uutiset</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h1>Huonot Uutiset</h1>
+            </div>
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{% static "vendor/bootstrap-3.3.5-dist/js/bootstrap.min.js" %}"></script>
+</body>
+</html>
