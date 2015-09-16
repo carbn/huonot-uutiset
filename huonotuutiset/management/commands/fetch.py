@@ -36,7 +36,7 @@ class Command(BaseCommand):
                         }
                     )
                 except DataError as e:
-                    self.stdout.write('ERROR: ' + str(e))
+                    self.stderr.write('ERROR: failed to update %s: %s' % (site.name, str(e)))
                     continue
 
                 if created:
