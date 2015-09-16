@@ -8,6 +8,7 @@ class SiteAdmin(admin.ModelAdmin):
 
 class NewsItemAdmin(admin.ModelAdmin):
     search_fields = ('title',)
+    readonly_fields = ('score',)
     exclude = ('matches',)
 
 class RuleAdmin(admin.ModelAdmin):
