@@ -14,9 +14,20 @@ class Command(BaseCommand):
             default=False,
             help='Update all ratings')
 
+        parser.add_argument('--test',
+            dest='test',
+            type=lambda s: unicode(s, 'utf8'),
+            default=None,
+            help='Test by rating a single string')
+
     @transaction.atomic
     def handle(self, *args, **options):
         rules = Rule.objects.all()
+
+        if options['test']:
+            score, matches = rate(options['test'], rules)
+            self.stdout.write('score: %.1f, matches: %s' % (score, ' '.join([m.name for m in matches])))
+            return
 
         if options['all']:
             all_items = NewsItem.objects.all()

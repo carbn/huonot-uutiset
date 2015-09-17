@@ -7,7 +7,9 @@ def rate(title, rules):
     matches = []
 
     for rule in rules:
-        if re.search(rule.regex, title, re.IGNORECASE|re.UNICODE):
+        m = re.search(rule.regex, title, re.IGNORECASE|re.UNICODE)
+
+        if m and m.group(0):
             score *= rule.multiplier
             matches.append(rule)
 
