@@ -6,33 +6,44 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-sm-offset-2 col-sm-4">
+    <div class="col-sm-offset-1 col-sm-10">
         <table>
-            <caption>Huonoimmat sivustot</caption>
-            {% for site in sites %}
+            <caption>Keskimäärin huonoin sivusto</caption>
+            {% for site in worst_sites_avg %}
                 <tr>
                     <th>{{ forloop.counter }}.</th>
                     <td>{{ site.name }}</td>
-                    <td>{{ site.score|floatformat:2 }}</td>
+                    <td align="right">{{ site.score|floatformat:2 }}</td>
                 </tr>
             {% endfor %}
         </table>
     </div>
-    <div class="col-sm-offset-0 col-sm-4">
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
         <table>
-            <caption>Parhaimmat sivustot</caption>
-            <tr>
-                <th>1.</th>
-                <td>Helsingin Sanomat</td>
-            </tr>
-            <tr>
-                <th>2.</th>
-                <td>Iltasanomat</td>
-            </tr>
-            <tr>
-                <th>3.</th>
-                <td>Aamulehti</td>
-            </tr>
+            <caption>Absoluuttisesti huonoin otsikko</caption>
+            {% for newsitem in worst_titles %}
+                <tr>
+                    <th>{{ forloop.counter }}.</th>
+                    <td>{{ newsitem.site.name }}: {{ newsitem.title }}</td>
+                    <td align="right">{{ newsitem.score|floatformat:2 }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
+        <table>
+            <caption>Suurin määrä surkeita otsikoita</caption>
+            {% for site in worst_sites_abs %}
+                <tr>
+                    <th>{{ forloop.counter }}.</th>
+                    <td>{{ site.name }}</td>
+                    <td align="right">{{ site.bad_count }} kpl</td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 </div>
