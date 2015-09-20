@@ -22,6 +22,12 @@ class Command(BaseCommand):
             feed = feedparser.parse(site.rss_url)
 
             for entry in feed.entries:
+                required_keys = ['id', 'published_parsed', 'title', 'link']
+
+                if not set(entry.keys()).issuperset(required_keys):
+                    self.stderr.write('WARNING: missing fields in the entry: %s' % (entry.keys()))
+                    continue
+
                 guid = uuid.UUID(bytes=hashlib.md5(entry['id']).digest())
                 published = datetime.fromtimestamp(mktime(entry['published_parsed'])).replace(tzinfo=pytz.UTC)
 
