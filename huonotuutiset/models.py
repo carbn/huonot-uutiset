@@ -16,7 +16,7 @@ class Rule(models.Model):
     multiplier = models.FloatField()
 
     def __unicode__(self):
-        return self.name + ' (' + self.regex + ')'
+        return self.name
 
 
 class NewsItem(models.Model):

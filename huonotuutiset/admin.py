@@ -7,9 +7,11 @@ class SiteAdmin(admin.ModelAdmin):
     ordering = ('name',)
 
 class NewsItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'score', 'published')
+    list_filter = ('matches',)
+    ordering = ('-published',)
     search_fields = ('title',)
-    readonly_fields = ('score',)
-    exclude = ('matches',)
+    readonly_fields = ('score', 'matches',)
 
 class RuleAdmin(admin.ModelAdmin):
     list_display = ('name', 'regex', 'multiplier')
