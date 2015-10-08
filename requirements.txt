@@ -2,3 +2,4 @@ Django>=1.8,<1.9
 feedparser
 pytz
 psycopg2
+isoweek

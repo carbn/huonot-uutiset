@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-10">
+        Sivusto: {{ site.name }}
+        URL: {% url 'site' site.id %}
+    </div>
+</div>
+{% endblock %}
