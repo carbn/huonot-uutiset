@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
+    <div class="col-sm-12">
+        <p>Statistiikat ajalle <i>{{ date_range.start }} - {{ date_range.end }}</i></p>
+    </div>
+</div>
+<div class="row">
     <div class="col-sm-offset-1 col-sm-10">
         <table>
             <caption>Keskimäärin huonoin sivusto</caption>

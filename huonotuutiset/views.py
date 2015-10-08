@@ -55,6 +55,11 @@ def home(request, year=None, week=None):
         'worst_titles': worst_titles,
         'site_avg': site_avg,
         'bad_percentages': percentages,
+        'date_range': {
+            'week': week,
+            'start': date_range[0].date(),
+            'end': date_range[1].date(),
+        }
     }
 
     return render(request, 'home.html', context)
