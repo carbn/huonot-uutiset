@@ -2,6 +2,7 @@ from django import template
 
 register = template.Library()
 
+
 # from http://stackoverflow.com/questions/19268727/django-how-to-get-the-name-of-the-template-being-rendered
 @register.simple_tag
 def active_page(request, view_name):

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.shortcuts import render
-from django.db.models import Avg, Count, F, Sum, Case, When, IntegerField
+from django.db.models import Avg, Count, Sum, Case, When, IntegerField
 from django.utils import timezone
 from isoweek import Week
 
@@ -22,19 +22,19 @@ def home(request, year=None, week=None):
 
     # worst sites on average
     site_avg = Site.objects.filter(
-            newsitems__published__range=date_range,
-            newsitems__score__isnull=False
+        newsitems__published__range=date_range,
+        newsitems__score__isnull=False
         ).annotate(
-            score=Avg('newsitems__score')
+        score=Avg('newsitems__score')
         ).order_by('-score')[:5]
 
     # biggest percentage of bad titles
     sites = Site.objects.filter(
-            newsitems__published__range=date_range,
-            newsitems__score__isnull=False
+        newsitems__published__range=date_range,
+        newsitems__score__isnull=False
         ).annotate(
-            bad=Sum(Case(When(newsitems__score__gt=1.0, then=1), output_field=IntegerField())),
-            total=Count('newsitems__score'),
+        bad=Sum(Case(When(newsitems__score__gt=1.0, then=1), output_field=IntegerField())),
+        total=Count('newsitems__score'),
         )
 
     percentages = []

@@ -1,20 +1,23 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db import transaction
 
 from huonotuutiset.models import NewsItem, Rule
 from huonotuutiset.rating import rate
 
+
 class Command(BaseCommand):
     help = 'Calculate ratings for news items'
 
     def add_arguments(self, parser):
-        parser.add_argument('--all',
+        parser.add_argument(
+            '--all',
             action='store_true',
             dest='all',
             default=False,
             help='Update all ratings')
 
-        parser.add_argument('--test',
+        parser.add_argument(
+            '--test',
             dest='test',
             type=lambda s: unicode(s, 'utf8'),
             default=None,

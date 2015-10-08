@@ -1,7 +1,7 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.db.models import Avg
 
-from huonotuutiset.models import Site, NewsItem
+from huonotuutiset.models import Site
 
 
 class Command(BaseCommand):
